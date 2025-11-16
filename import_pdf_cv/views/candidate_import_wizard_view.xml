@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_candidate_import_wizard_form" model="ir.ui.view">
+        <field name="name">candidate.import.wizard.form</field>
+        <field name="model">candidate.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload PDF CV of the candidate" enctype="multipart/form-data">
+                <group>
+                    <field name="pdf_file" filename="filename"/>
+                    <field name="filename" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Upload" type="object" name="action_import_one_pdf" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_pdf_cv_wizard" model="ir.actions.act_window">
+        <field name="name">Upload PDF CV of the candidate</field>
+        <field name="res_model">candidate.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_candidate_import_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+                name="Import PDF CV"
+                parent="hr_recruitment.menu_crm_case_categ0_act_job"
+                id="menu_hr_import_candidate_pdf_root"
+                sequence="10"/>
+    <menuitem
+                name="Import PDF CV"
+                parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+                id="menu_hr_import_candidate_pdf"
+                action="action_import_pdf_cv_wizard"
+                sequence="1"/>
+
+    <record id="view_candidate_import_wizard_form_2" model="ir.ui.view">
+        <field name="name">candidate.import.wizard.form.2</field>
+        <field name="model">candidate.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Upload PDF CV of the candidate" enctype="multipart/form-data">
+                <group>
+                    <field name="zip_file" filename="filename_2"/>
+                    <field name="filename_2" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Upload" type="object" name="action_upload_zip_file_and_extraction" class="btn-primary o_import_pdf_upload"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_zip_cv_wizard" model="ir.actions.act_window">
+        <field name="name">Upload ZIP file of the candidates</field>
+        <field name="res_model">candidate.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_candidate_import_wizard_form_2"/>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+                name="Import Zip file CV"
+                parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+                id="menu_hr_import_candidate_zip"
+                action="action_import_zip_cv_wizard"
+                sequence="2"/>
+
+
+
+
+
+
+    <record id="view_candidate_import_wizard_form_3" model="ir.ui.view">
+    <field name="name">candidate.import.wizard.form.2</field>
+    <field name="model">candidate.import.wizard_2</field>
+    <field name="arch" type="xml">
+        <form string="Upload PDF CV of the candidate" class="import-multi-pdf">
+            <group>
+
+                <field name="attachment_ids" help="CV PDF File to import" widget="many2many_binary"
+                       options="{'accepted_file_extensions': ['.pdf']}"/>
+
+            </group>
+            <div>
+                <p>Please wait for the system to finish uploading before clicking the button "Import PDF file".</p>
+                <p class="d-none" id="p-processing">PDF CVs is processing! Please wait, click "OK" button to close
+                    this dialog.
+                </p>
+            </div>
+            <footer>
+                <button string="Import PDF file"
+                        type="object"
+                        name="choose_pdf_file"
+                        class="btn-primary o_import_pdf_upload"/>
+                <!--
+                <button string="Upload" type="object" name="action_import_one_pdf" class="btn-primary"/>
+                -->
+                <button string="Close" special="cancel" class="d-none"/>
+                <button string="Cancel" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+  </record>
+
+    <record id="action_candidate_import_wizard_3" model="ir.actions.act_window">
+        <field name="name">Upload PDF CVs</field>
+        <field name="res_model">candidate.import.wizard_2</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_candidate_import_wizard_form_3"/>
+        <field name="target">new</field>
+    </record>
+    <!--
+    <menuitem
+            name="Import multi file PDF CV"
+            parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+            id="menu_hr_import_candidate_multi_file"
+            action="action_candidate_import_wizard_3"
+            sequence="3"/>
+    -->
+
+
+
+    <record id="action_directory_uploader" model="ir.actions.client">
+        <field name="name">Directory Uploader</field>
+        <field name="tag">import_pdf_cv_directory_uploader</field>
+    </record>
+
+
+    <menuitem id="menu_directory_uploader"
+              name="Upload Folder"
+              parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+              sequence="4"
+              action="action_directory_uploader"/>
+
+    <record id="action_hr_candidate_tree_import_folder" model="ir.actions.act_window">
+        <field name="name">Candidates</field>
+        <field name="res_model">hr.candidate</field>
+        <field name="view_mode">list,form</field>
+        <field name="target">current</field>
+    </record>
+
+
+    <record id="action_multifile_uploader" model="ir.actions.client">
+        <field name="name">Multi Files Uploader</field>
+        <field name="tag">import_pdf_cv_multifile_uploader</field>
+    </record>
+
+    <menuitem id="menu_multifile_uploader"
+              name="Upload Multifile"
+              parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+              sequence="3"
+              action="action_multifile_uploader"/>
+
+    <!-- View process pending attachments -->
+
+
+    <record id="view_list_ir_attachment_process_pending_attachments" model="ir.ui.view">
+        <field name="name">ir.attachment.process.pending.list.attachments</field>
+        <field name="model">ir.attachment</field>
+        <field name="arch" type="xml">
+            <list string="Process PDF CV" create="false" delete="false" edit="false">
+                <field name="name"/>
+                <field name="processing"/>
+                <field name="process_fault"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_ir_attachment_process_pending_attachments" model="ir.actions.act_window">
+        <field name="name">Process PDF CV</field>
+        <field name="res_model">ir.attachment</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_list_ir_attachment_process_pending_attachments"/>
+        <field name="domain">[('processing', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There are no pending CV PDF to process.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_view_pending_attachments"
+              name="PDF CV to Process"
+              parent="import_pdf_cv.menu_hr_import_candidate_pdf_root"
+              sequence="5"
+              action="action_ir_attachment_process_pending_attachments"/>
+
+
+</odoo>

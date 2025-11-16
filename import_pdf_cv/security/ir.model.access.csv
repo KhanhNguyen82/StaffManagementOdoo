@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_candidate_import_wizard,candidate_import_wizard viewer,import_pdf_cv.model_candidate_import_wizard,,1,1,1,0
+access_import_pdf_candidate_skill,import_pdf_candidate_skill viewer,import_pdf_cv.model_import_pdf_candidate_skill,,1,1,1,0
+access_import_pdf_cv_document,access import_pdf_cv_document,model_import_pdf_cv_document,,1,1,1,1
+access_candidate_import_wizard_2,candidate_import_wizard_2 viewer,import_pdf_cv.model_candidate_import_wizard_2,,1,1,1,0

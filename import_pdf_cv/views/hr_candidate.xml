@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="hr_candidate_inherite_view_form" model="ir.ui.view">
+        <field name="name">hr.candidate.inherite.form</field>
+        <field name="model">hr.candidate</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_candidate_view_form"/>
+        <field name="arch" type="xml">
+
+            <field name="linkedin_profile" position="after">
+                <field name="github_link"/>
+            </field>
+            <field name="type_id" position="after">
+                <field name="gpa_score"/>
+
+
+            </field>
+            <field name="categ_ids" position="after">
+                <field name="experience_years"/>
+                <field name="candidate_type"/>
+                <field name="best_skill"/>
+                <field name="language"/>
+            </field>
+
+            <xpath expr="//notebook" position="inside">
+
+                <page string="Brief Introduction">
+                    <group>
+                        <field name="brief_introduction"/>
+                    </group>
+                </page>
+                <page string="Education">
+                    <group>
+                        <field name="education" widget="html"/>
+                    </group>
+                </page>
+                <page string="Experiences">
+                    <group>
+                        <field name="experience" widget="html"/>
+                    </group>
+                </page>
+                <page string="Projects has worked on">
+                    <group>
+                        <field name="projects" widget="html"/>
+                    </group>
+                </page>
+                <page string="Interests">
+                    <group>
+                        <field name="interests"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+
+
+
+
+
+    <!-- Multi file upload -->
+    <record id="view_my_document_form" model="ir.ui.view">
+        <field name="name">my.document.form</field>
+        <field name="model">import_pdf_cv.document</field>
+        <field name="arch" type="xml">
+            <form string="My Document">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+
+                <!-- Chatter + Attachments -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_my_document_tree" model="ir.ui.view">
+        <field name="name">my.document.tree</field>
+        <field name="model">import_pdf_cv.document</field>
+        <field name="arch" type="xml">
+            <list string="Documents">
+                <field name="name"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <menuitem id="menu_my_document_root" name="My Documents"/>
+
+
+    <record id="action_my_document" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">import_pdf_cv.document</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <menuitem id="menu_my_document" parent="menu_my_document_root" action="action_my_document"/>
+
+
+
+
+
+</odoo>

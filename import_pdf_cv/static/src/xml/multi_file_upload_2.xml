@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="multi_pdf_upload_template" owl="1">
+        <div class="o_multi_pdf_upload">
+            <input
+                type="file"
+                multiple="multiple"
+                accept=".pdf"
+                t-ref="fileInput"
+                t-on-change="onFileChange"
+            />
+            <ul>
+                <t t-foreach="props.record.data.attachment_ids" t-as="att" t-key="att">
+                    <li><t t-esc="att[1]"/></li>
+                </t>
+            </ul>
+        </div>
+    </t>
+</templates>

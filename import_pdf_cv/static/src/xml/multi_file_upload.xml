@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="import_pdf_cv.MultifileUploader" owl="1">
+        <div class="o_directory_uploader mt-3 text-center" style="
+                margin: auto;
+                border: 1px solid #abaabb;
+                padding: 20px;
+                width: 30%;
+            ">
+            <h4 class="mt-1 mb-3">Select files</h4>
+            <input
+                    type="file"
+                    t-ref="fileInput"
+                    accept=".pdf"
+                    multiple="true"
+                    t-on-change="onFilesSelected"
+            />
+
+                    <div t-ref="warning" class="alert alert-warning d-none mt-2">
+                <t t-if="state.inProgress">
+                    Đang upload... <t t-esc="state.done"/>
+                    /
+                    <t t-esc="state.total"/>
+                    (<t t-esc="progressPercent"/>%)
+                    <div class="progress mt-1">
+                        <div
+                                class="progress-bar"
+                                role="progressbar"
+                                t-att-style="'width:' + progressPercent + '%;'"
+                                t-att-aria-valuenow="progressPercent"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                        ></div>
+                    </div>
+                </t>
+            </div>
+        </div>
+
+    </t>
+</templates>
+
+
+
